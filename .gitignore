@@ -1,0 +1,10 @@
+# Keto Macro Calculator gitignore
+/.vscode/
+/.wordpress-org/
+/vendor/
+/node_modules/
+/composer.lock
+/package-lock.json
+*.log
+*.zip
+.DS_Store
