@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "text-wrap",
+          "text-wrap: balance",
+          "scrollbar-width",
+          "scrollbar-width: none",
+          "color: color-mix(in srgb, var(--kc-text-light) 50%, white)",
+          "-webkit-overflow-scrolling"
+        ]
+      }
+    ]
+  },
+  "browserslist": [
+    "defaults",
+    "not ie 11",
+    "not chrome <= 109"
+  ]
+}

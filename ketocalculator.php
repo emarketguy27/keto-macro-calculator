@@ -2,8 +2,8 @@
 /*
 * Plugin Name: Keto Macro Calculator
 * Plugin URI:        https://jamesdennis.org
-* Description: Keto Macro Calculator is a simple calculator, which is used to measure nutritional needs for a ketogenic diet. Use shortcode "[[keto_macro_calculator]]" anywhere on your page.
-* Version: 1.0
+* Description: Keto Macro Calculator is a simple calculator, which is used to measure nutritional needs for a ketogenic diet. Use shortcode "[keto_macro_calculator]" anywhere on your page.
+* Version: 1.0.1
 * Author: James Dennis
 * Author URI: https://jamesdennis.org
 * Text Domain: keto-calculator
@@ -256,33 +256,32 @@ function keto_macro_calculator() {
             
             <!-- Deficit Charts -->
             <div class="chart-slider-wrapper" id="calorieDeficitCharts" style="display: none;">
-                <button class="slider-nav prev"><strong>&larr;</strong></button>
-                
                 <div class="chart-slider-container">
                     <div class="chart-slider">
                         <!-- Charts Injected Here by Javascript -->
                     </div>
                 </div>
-
-                <button class="slider-nav next"><strong>&rarr;</strong></button>
-                <!-- Dots navigation -->
-                <div class="slider-dots"></div>
+                <!-- navigation -->
+                <div class="slider-nav-wrap" id="def-nav">
+                    <button class="slider-nav prev deficit-nav"><strong>&larr;</strong></button>
+                    <div class="slider-dots"></div>
+                    <button class="slider-nav next deficit-nav"><strong>&rarr;</strong></button>
+                </div>
             </div>
             
             <!-- Surplus Charts -->
             <div class="chart-slider-wrapper" id="calorieSurplusChart" style="display: none;">
-                <button class="slider-nav prev"><strong>&larr;</strong></button>
-                
-
                 <div class="chart-slider-container">
                     <div class="chart-slider">
                     <!-- Charts Injected Here by Javascript -->
                     </div>
                 </div>
-                
-                <button class="slider-nav next"><strong>&rarr;</strong></button>
-                <!-- Dots navigation -->
-                <div class="slider-dots"></div>
+                <!-- navigation -->
+                 <div class="slider-nav-wrap" id="surp-nav">
+                    <button class="slider-nav prev surplus-nav"><strong>&larr;</strong></button>
+                    <div class="slider-dots"></div>
+                    <button class="slider-nav next surplus-nav"><strong>&rarr;</strong></button>
+                </div>
             </div>
         </div>    
     </div>

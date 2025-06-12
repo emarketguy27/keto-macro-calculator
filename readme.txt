@@ -4,7 +4,7 @@ Donate link: https://jamesdennis.org
 Tags: keto, calculator, nutrition, health, macro, ketogenic, diet
 Requires at least: 5.6
 Tested up to: 6.8.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPL v3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -12,7 +12,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Keto Macro Calculator is a modern, fully responsive macronutritional calculator specifically designed for the Ketogenic Diet. 
 
-Simply add the shortcode <code>[keto_macro_calculator]</code> to any page or post to display an interactive calculator that helps users determine their optimal macronutrient ratios for a ketogenic lifestyle.
+Simply add the shortcode [keto_macro_calculator] to any page or post to display an interactive calculator that helps users determine their optimal macronutrient ratios for a ketogenic lifestyle.
 
 For more information on WordPress plugin development, visit jamesdennis.org Plugin Development Services page. Explore our other WordPress Plugins, or contact us at james@jamesdennis.org.
 
@@ -22,12 +22,13 @@ For more information on WordPress plugin development, visit jamesdennis.org Plug
 - Displays calculated results in both tabular and graphical formats.
 - Offers diet plans for weight loss or weight gain, tailored to user goals.
 - Easily embed the calculator on any WordPress page using the [keto_macro_calculator] shortcode.
-- Modern, stylish UI/UX design
-- Smooth animations for enhanced user experience
-- Interactive charts for visualizing macronutrient distribution
-- Fully responsive - works on all devices
-- Simple shortcode implementation
-- Compatible with both classic and block themes
+- Modern, stylish UI/UX design.
+- Smooth animations for enhanced user experience.
+- Interactive charts for visualizing macronutrient distribution.
+- Includes responsive, animated variations slider.
+- Fully responsive - works on all devices.
+- Simple shortcode implementation.
+- Compatible with both classic and block themes.
 
 
 == Future Updates ==
