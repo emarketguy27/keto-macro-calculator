@@ -95,7 +95,9 @@ function keto_macro_calculator() {
                                 <span class="dashicons dashicons-calendar"></span>
                                 <?php esc_html_e('Age:', 'keto-calculator'); ?>
                             </label>
-                            <input type="number" id="age" name="age" placeholder="30">
+                            <div class="input-with-unit">
+                                <input type="number" id="age" name="age" placeholder="30">
+                            </div>
                         </div>
                     </div>
 
