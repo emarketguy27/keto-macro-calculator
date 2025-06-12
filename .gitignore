@@ -1,4 +1,17 @@
 # Keto Macro Calculator gitignore
+*.code-workspace
+.vscode/
+.idea/
+node.modules/
+package-lock.json
+*.zip
+*.map
+wp-config.php
+debug.log
+.env
+.env.local
+.hintrc
+package.json
 /.vscode/
 /.wordpress-org/
 /vendor/
