@@ -3,7 +3,7 @@
 * Plugin Name: Keto Macro Calculator
 * Plugin URI:        https://jamesdennis.org
 * Description: Keto Macro Calculator is a simple calculator, which is used to measure nutritional needs for a ketogenic diet. Use shortcode "[keto_macro_calculator]" anywhere on your page.
-* Version: 1.0.1
+* Version: 1.1.0
 * Author: James Dennis
 * Author URI: https://jamesdennis.org
 * Text Domain: keto-calculator
@@ -35,14 +35,14 @@ function keto_macro_calculator_enqueue_scripts() {
         'keto-calculator-js',
         plugin_dir_url(__FILE__) . 'assets/js/keto-calculator.min.js',
         array('jquery'),
-        $plugin_version, 
+        '1.1.0', 
         true
     );
     wp_enqueue_style(
         'keto-calculator-style',
         plugin_dir_url(__FILE__) . 'assets/css/keto-calculator.min.css',
         array(),
-        $plugin_version,
+        '1.1.0',
     );
 }
 add_action('wp_enqueue_scripts', 'keto_macro_calculator_enqueue_scripts');

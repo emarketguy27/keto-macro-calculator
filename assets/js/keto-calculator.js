@@ -491,78 +491,77 @@ document.addEventListener('DOMContentLoaded', function () {
         initSliderDots(document.getElementById('calorieSurplusChart'));
     }
     
+    // Slider Button click handlers
+    document.querySelectorAll('.slider-nav').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const wrapper = button.closest('.chart-slider-wrapper');
+            const container = wrapper.querySelector('.chart-slider-container');
+            const scrollAmount = container.clientWidth * 0.8; // Adjust as needed
+            
+            container.scrollBy({
+            left: button.classList.contains('prev') ? -scrollAmount : scrollAmount,
+            behavior: 'smooth'
+            });
+
+            setTimeout(() => {
+            button.closest('.chart-slider-wrapper')
+                    .querySelector('.slider-dots')
+                    .dispatchEvent(new Event('scroll'));
+            }, 300);
+        });
+    });
+
+    // Initialize for all sliders
+    function initSliderDots(sliderWrapper) {
+    const container = sliderWrapper.querySelector('.chart-slider-container');
+    const slider = sliderWrapper.querySelector('.chart-slider');
+    const dotsContainer = sliderWrapper.querySelector('.slider-dots');
+    const slides = slider.children;
+    
+    // Clear and recreate dots
+    dotsContainer.innerHTML = '';
+    Array.from(slides).forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'slider-dot';
+        if (index === 0) dot.classList.add('active');
+        
+        dot.addEventListener('click', () => {
+        goToSlide(index);
+        });
+        
+        dotsContainer.appendChild(dot);
+    });
+
+    // Sync dots with scroll position
+    container.addEventListener('scroll', updateActiveDot);
+    
+    function goToSlide(index) {
+        container.scrollTo({
+        left: slides[index].offsetLeft,
+        behavior: 'smooth'
+        });
+    }
+
+    function updateActiveDot() {
+        const scrollPos = container.scrollLeft + (container.clientWidth / 2);
+        
+        Array.from(slides).forEach((slide, index) => {
+        const dot = dotsContainer.children[index];
+        const slideStart = slide.offsetLeft;
+        const slideEnd = slideStart + slide.offsetWidth;
+        
+        dot.classList.toggle('active', scrollPos >= slideStart && scrollPos <= slideEnd);
+        });
+    }
+    
+    // Update dots when arrows are clicked
+    sliderWrapper.querySelectorAll('.slider-nav').forEach(btn => {
+        btn.addEventListener('click', () => {
+        setTimeout(updateActiveDot, 300); // Match scroll duration
+        });
+    });
+    }
 });
-
-// Slider Button click handlers
-document.querySelectorAll('.slider-nav').forEach(button => {
-  button.addEventListener('click', (e) => {
-    const wrapper = button.closest('.chart-slider-wrapper');
-    const container = wrapper.querySelector('.chart-slider-container');
-    const scrollAmount = container.clientWidth * 0.8; // Adjust as needed
-    
-    container.scrollBy({
-      left: button.classList.contains('prev') ? -scrollAmount : scrollAmount,
-      behavior: 'smooth'
-    });
-
-    setTimeout(() => {
-      button.closest('.chart-slider-wrapper')
-            .querySelector('.slider-dots')
-            .dispatchEvent(new Event('scroll'));
-    }, 300);
-  });
-});
-
-// Initialize for all sliders
-function initSliderDots(sliderWrapper) {
-  const container = sliderWrapper.querySelector('.chart-slider-container');
-  const slider = sliderWrapper.querySelector('.chart-slider');
-  const dotsContainer = sliderWrapper.querySelector('.slider-dots');
-  const slides = slider.children;
-  
-  // Clear and recreate dots
-  dotsContainer.innerHTML = '';
-  Array.from(slides).forEach((_, index) => {
-    const dot = document.createElement('div');
-    dot.className = 'slider-dot';
-    if (index === 0) dot.classList.add('active');
-    
-    dot.addEventListener('click', () => {
-      goToSlide(index);
-    });
-    
-    dotsContainer.appendChild(dot);
-  });
-
-  // Sync dots with scroll position
-  container.addEventListener('scroll', updateActiveDot);
-  
-  function goToSlide(index) {
-    container.scrollTo({
-      left: slides[index].offsetLeft,
-      behavior: 'smooth'
-    });
-  }
-
-  function updateActiveDot() {
-    const scrollPos = container.scrollLeft + (container.clientWidth / 2);
-    
-    Array.from(slides).forEach((slide, index) => {
-      const dot = dotsContainer.children[index];
-      const slideStart = slide.offsetLeft;
-      const slideEnd = slideStart + slide.offsetWidth;
-      
-      dot.classList.toggle('active', scrollPos >= slideStart && scrollPos <= slideEnd);
-    });
-  }
-  
-  // Update dots when arrows are clicked
-  sliderWrapper.querySelectorAll('.slider-nav').forEach(btn => {
-    btn.addEventListener('click', () => {
-      setTimeout(updateActiveDot, 300); // Match scroll duration
-    });
-  });
-}
 
 jQuery(document).ready(function($) {
     function updateUnits() {
@@ -591,9 +590,6 @@ jQuery(document).ready(function($) {
         }, 800);
     });
 });
-
-
-
 
 // ***** Debug check to test loading of charts CDN turned Off unless debugging chart issues ***** //
 // if (typeof ApexCharts === 'undefined') {

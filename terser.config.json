@@ -1,0 +1,18 @@
+{
+  "compress": {
+    "dead_code": true,
+    "unused": true
+  },
+  "mangle": {
+    "reserved": ["jQuery", "$"]
+  },
+  "output": {
+    "beautify": false,
+    "comments": "/^!/",
+    "preserve_annotations": true
+  },
+  "sourceMap": {
+    "filename": "keto-calculator.min.js",
+    "url": "keto-calculator.min.js.map"
+  }
+}
