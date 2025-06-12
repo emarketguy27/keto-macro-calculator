@@ -12,6 +12,8 @@ debug.log
 .env.local
 .hintrc
 package.json
+terser.config.json
+postcss.config.js
 /.vscode/
 /.wordpress-org/
 /vendor/
