@@ -33,14 +33,14 @@ function keto_macro_calculator_enqueue_scripts() {
     // Enqueue the main JavaScript file
     wp_enqueue_script(
         'keto-calculator-js',
-        plugin_dir_url(__FILE__) . 'assets/js/keto-calculator.js',
+        plugin_dir_url(__FILE__) . 'assets/js/keto-calculator.min.js',
         array('jquery'),
         $plugin_version, 
         true
     );
     wp_enqueue_style(
         'keto-calculator-style',
-        plugin_dir_url(__FILE__) . 'assets/css/keto-calculator.css',
+        plugin_dir_url(__FILE__) . 'assets/css/keto-calculator.min.css',
         array(),
         $plugin_version,
     );
