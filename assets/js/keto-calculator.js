@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     behavior: 'smooth',
                     block: 'start' // Aligns to top of element
                 });
-                resultsSection.style = "visibility: visible; opacity: 1";
+                resultsSection.style = "visibility: visible; opacity: 1; height: 100%";
                 // Optional: Add focus for better accessibility
                 resultsSection.setAttribute('tabindex', '-1');
                 resultsSection.focus();

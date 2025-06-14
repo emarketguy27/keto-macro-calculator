@@ -42,13 +42,15 @@
   background: var(--kc-bg);
   border-radius: var(--kc-radius);
   box-shadow: var(--kc-shadow);
+  width: 600px;
+  justify-items: center;
 }
 
 /* ===== Form Structure ===== */
 .calc-form-wrapper {
   display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: var(--kc-space-lg);
+  grid-template-columns: 3fr 2fr;
+  gap: var(--kc-space-sm);
   padding-bottom: var(--kc-space-lg);
 
   @media (max-width: 1000px) {
@@ -61,7 +63,7 @@
   font-size: 1.3rem;
   padding: 0 var(--kc-space-lg) 0 0;
   container-type: inline-size;
-  min-width: 300px;
+  min-width: 400px;
   padding-block: var(--kc-space-lg);
   & strong {
     font-weight: 700;
@@ -86,6 +88,7 @@
   margin-bottom: var(--kc-space-lg);
   padding-bottom: var(--kc-space);
   border-bottom: 1px solid var(--kc-border);
+  width: 100%;
 
   &:last-child {
     border-bottom: none;
@@ -226,6 +229,7 @@ input#net_carbs {
   cursor: pointer;
   transition: var(--kc-transition);
   flex: 1;
+  margin: 0;
 
   &:hover {
     border-color: color-mix(in srgb, var(--kc-border) 70%, black);
@@ -286,7 +290,9 @@ input#net_carbs {
 
 /* ===== Button Styles ===== */
 .keto-calc-btn {
-  width: 100%;
+  width: fit-content;
+  height: 3rem;
+  justify-self: center;
   padding: var(--kc-space);
   background: linear-gradient(135deg, var(--kc-secondary) 0%, var(--kc-accent) 100%);
   color: var(--kc-text-on-dark);
@@ -315,7 +321,6 @@ input#net_carbs {
 
 /* ===== Results Section ===== */
 #ketoResults {
-  display: flex;
   flex-direction: column;
   transition: opacity var(--kc-transition);
 
@@ -363,6 +368,16 @@ input#net_carbs {
   justify-content: center;
   box-shadow: var(--kc-shadow);
 
+  p {
+    text-wrap: balance;
+    line-height: 1;
+    margin-block-start: 0;
+
+    i {
+      font-size: var(--kc-font-size-sm);
+    }
+  }
+
   p.value {
     width: 100%;
     font-weight: bold;
@@ -372,6 +387,8 @@ input#net_carbs {
     color: var(--kc-text-on-dark);
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.48);
     letter-spacing: 1px;
+    margin-block-start: 0;
+    
   }
 }
 
@@ -402,6 +419,11 @@ input#net_carbs {
 
 #chart {
   margin: var(--kc-space-lg) auto;
+}
+
+.form-description {
+  padding: 0 2.5em;
+  margin-bottom: 3em;
 }
 
 .variations-header {
@@ -506,7 +528,7 @@ input#net_carbs {
 .slider-nav {
   position: absolute;
   bottom: -2em;
-  margin-inline: 1.5em;
+  margin-inline: 3.5em;
   background: var(--kc-primary);
   width: 3em;
   height: 3em;
@@ -516,6 +538,8 @@ input#net_carbs {
   padding: 10px 4px;
   cursor: pointer;
   z-index: 9999;
+  opacity: .6;
+  transition: var(--kc-transition);
 
   &:hover {
     background: var(--kc-primary-light);

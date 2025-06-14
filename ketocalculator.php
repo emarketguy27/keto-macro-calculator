@@ -3,7 +3,7 @@
 * Plugin Name: Keto Macro Calculator
 * Plugin URI:        https://jamesdennis.org
 * Description: Keto Macro Calculator is a simple calculator, which is used to measure nutritional needs for a ketogenic diet. Use shortcode "[keto_macro_calculator]" anywhere on your page.
-* Version: 1.1.0
+* Version: 1.2.5
 * Author: James Dennis
 * Author URI: https://jamesdennis.org
 * Text Domain: keto-calculator
@@ -18,32 +18,35 @@ add_action('plugins_loaded', 'keto_macro_calculator_init');
 
 // Enqueue the JavaScript and CSS files
 function keto_macro_calculator_enqueue_scripts() {
-    // Versioning for cache-busting
-    $plugin_version = '1.6'; 
-    
-    // Enqueue the ApexCharts JavaScript library
-    wp_enqueue_script(
-        'apexcharts',
-        'https://cdn.jsdelivr.net/npm/apexcharts',
-        array(),
-        '3.35.0', 
-        true
-    );
+	global $post;
+	
+	// Check if current post contains our shortcode
+    if (is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'keto_macro_calculator')) {
+        // ApexCharts JavaScript library
+		wp_enqueue_script(
+			'apexcharts',
+			'https://cdn.jsdelivr.net/npm/apexcharts',
+			array(),
+			'3.35.0', 
+			true
+		);
 
-    // Enqueue the main JavaScript file
-    wp_enqueue_script(
-        'keto-calculator-js',
-        plugin_dir_url(__FILE__) . 'assets/js/keto-calculator.min.js',
-        array('jquery'),
-        '1.1.0', 
-        true
-    );
-    wp_enqueue_style(
-        'keto-calculator-style',
-        plugin_dir_url(__FILE__) . 'assets/css/keto-calculator.min.css',
-        array(),
-        '1.1.0',
-    );
+		// main JavaScript file
+		wp_enqueue_script(
+			'keto-calculator-js',
+			plugin_dir_url(__FILE__) . 'assets/js/keto-calculator.min.js',
+			array('jquery'),
+			'1.2.5', 
+			true
+		);
+        // main JavaScript file
+		wp_enqueue_style(
+			'keto-calculator-style',
+			plugin_dir_url(__FILE__) . 'assets/css/keto-calculator.min.css',
+			array(),
+			'1.2.5',
+		);
+    } 
 }
 add_action('wp_enqueue_scripts', 'keto_macro_calculator_enqueue_scripts');
 
@@ -213,17 +216,19 @@ function keto_macro_calculator() {
             </div>
         </div>
             
-        <div id="ketoResults" style="visibility: hidden; opacity: 0">
+        <div id="ketoResults" style="visibility: hidden; opacity: 0; height: 0px">
             <div class="main-results">
                 <div class="results-group">
                     <h2><?php esc_html_e('Your Results', 'keto-calculator'); ?></h2>
                     <div class="result-group">
+                        <h3>Your Current Base Metabolic Rate.</h3>
                         <p class="value"><?php esc_html_e('BMR:', 'keto-calculator'); ?> <span id="bmrValue">--</span> kcal/day</p>
-                        <p>Your Current Base Metabolic Rate: Daily Calories for your Age, Gender, Weight and Height.</p>
+                        <p><i>Based on the more accurate <a href="https://en.wikipedia.org/wiki/Basal_metabolic_rate">Katch-McArdle formula</a> when body fat % is known</i></p>
                     </div>
                     <div class="result-group">
+                        <h3>Daily Calories</h3>
                         <p class="value"><?php esc_html_e('Calories to Consume:', 'keto-calculator'); ?> <span id="caloriesToConsume">--</span> kcal/day</p>
-                        <p>Your Target Calorie Intake for a Standard Ketogenic Diet..</p>
+                        <p><i>Your daily TDEE "activity adjusted" Calorie Intake.</i></p>
                     </div>
                 </div>
                 <div class="chart-wrapper">
@@ -248,7 +253,15 @@ function keto_macro_calculator() {
                         </p>
                     </div>
                 </div>
-                
+            </div>
+            <div class="form-description">
+                <h3>Base Metabolic Rate (BMR)</h3>
+                <p>Basal Metabolic Rate, (BMR) is the measure of how many calories you should consume daily at your current age, height, and weight – at rest.</p>
+                <h3>Calories to consume</h3>
+                <p>This is the “maintanence” level of calories, taking into account your current activity levels, “Total Daily Energy Expenditure” – (TDEE). This calorie value is YOUR recommended daily calorie intake to maintain your current weight.</p>
+                <p>The main chart shows how this calorie recommendation should be divided into the main macronutrien groups, Fat, Protein and Carbs to initiate “ketosis” for a basic keto diet.</p>
+                <h3>Weight Loss Goal</h3>
+                <p>Set your target as ‘weight loss, or ‘weight gain’… then set the maximum carb content you want to include… the results then give you 3 levels of loss/gain with associated carbs, proteins & fats with calorie counts.</p>
             </div>
             
             <div class="variations-header">
@@ -294,3 +307,5 @@ function keto_macro_calculator() {
     return ob_get_clean();  
 }
 add_shortcode('keto_macro_calculator', 'keto_macro_calculator');
+
+

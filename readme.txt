@@ -4,7 +4,7 @@ Donate link: https://jamesdennis.org
 Tags: keto, calculator, nutrition, health, macro, ketogenic, diet
 Requires at least: 5.6
 Tested up to: 6.8.1
-Stable tag: 1.1.0
+Stable tag: 1.2.5
 License: GPL v3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -39,7 +39,7 @@ For more information on WordPress plugin development, visit jamesdennis.org Plug
 
 == Installation ==
 
-Upload the ketocalculator folder to the /wp-content/plugins/ directory.
+Upload the keto macro calculator folder to the /wp-content/plugins/ directory.
 Activate the plugin via the 'Plugins' menu in WordPress.
 Add the [keto_macro_calculator] shortcode wherever you wish to display the Keto Calculator.
 
