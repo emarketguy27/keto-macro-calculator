@@ -104,39 +104,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return heightInInches * 2.54; // 1 inch = 2.54 cm
     }
 
-    function calculateTDEEFromForm(formValues) {
-        // Fallback to empty object if undefined
-        const { 
-            gender = 'male', 
-            age = 30, 
-            weight = 70, 
-            height = 175, 
-            bodyFat, 
-            activityLevel = 'sedentary' 
-        } = formValues || {};
-        
-        // Your exact BMR calculation from calculateResults()
-        let bmr;
-        if (bodyFat && !isNaN(bodyFat)) {
-            const leanMass = weight * (1 - (bodyFat / 100));
-            bmr = 370 + (21.6 * leanMass);
-        } else {
-            bmr = (gender === "male") 
-            ? 10 * weight + 6.25 * height - 5 * age + 5 
-            : 10 * weight + 6.25 * height - 5 * age - 161;
-        }
-        
-        // Your exact activity multipliers
-        const activityMultipliers = {
-            sedentary: 1.2,
-            light: 1.375,
-            active: 1.55,
-            very_active: 1.725
-        };
-        
-        return bmr * (activityMultipliers[activityLevel] || 1.2);
-    }
-
     function calculateResults(formValues) {
         const { gender, age, weight, height, bodyFat, activityLevel, goal, carbsChoice } = formValues;
         // 1. Calculate BMR

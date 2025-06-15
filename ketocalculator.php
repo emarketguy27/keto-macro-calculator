@@ -1,13 +1,15 @@
 <?php
 /*
 * Plugin Name: Keto Macro Calculator
-* Plugin URI:        https://jamesdennis.org
-* Description: Keto Macro Calculator is a simple calculator, which is used to measure nutritional needs for a ketogenic diet. Use shortcode "[keto_macro_calculator]" anywhere on your page.
-* Version: 1.2.5
+* Plugin URI: https://jamesdennis.org/plugins/keto-macro-calculator
+* Description: A modern, accurate nutrition calculator used to measure nutritional needs for a ketogenic diet.
+* Version: 1.4.1
+* Requires at least: 5.6
 * Author: James Dennis
 * Author URI: https://jamesdennis.org
-* Text Domain: keto-calculator
 * License: GPL v3.0
+* License URI: https://www.gnu.org/licenses/gpl-3.0.html
+* Text Domain: keto-macro-calculator
 */
 
 function keto_macro_calculator_init() {
@@ -24,11 +26,11 @@ function keto_macro_calculator_enqueue_scripts() {
     if (is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'keto_macro_calculator')) {
         // ApexCharts JavaScript library
 		wp_enqueue_script(
-			'apexcharts',
-			'https://cdn.jsdelivr.net/npm/apexcharts',
-			array(),
-			'3.35.0', 
-			true
+			'apexcharts-js',
+			plugin_dir_url(__FILE__) . 'assets/js/apexcharts.min.js',
+            array(),
+            '3.35.0',
+            true
 		);
 
 		// main JavaScript file
@@ -36,7 +38,7 @@ function keto_macro_calculator_enqueue_scripts() {
 			'keto-calculator-js',
 			plugin_dir_url(__FILE__) . 'assets/js/keto-calculator.min.js',
 			array('jquery'),
-			'1.2.5', 
+			'1.4.1', 
 			true
 		);
         // main JavaScript file
@@ -44,8 +46,17 @@ function keto_macro_calculator_enqueue_scripts() {
 			'keto-calculator-style',
 			plugin_dir_url(__FILE__) . 'assets/css/keto-calculator.min.css',
 			array(),
-			'1.2.5',
+			'1.4.1',
 		);
+        // For frontend display (if using icons in shortcode/output)
+        add_action('wp_enqueue_scripts', function() {
+            wp_enqueue_style('dashicons');
+        });
+
+        // For admin pages (if using icons in admin UI)
+        add_action('admin_enqueue_scripts', function() {
+            wp_enqueue_style('dashicons');
+        });
     } 
 }
 add_action('wp_enqueue_scripts', 'keto_macro_calculator_enqueue_scripts');
@@ -60,34 +71,34 @@ function keto_macro_calculator() {
             <form id="ketoForm" class="keto-calculator-modern">
                 <div class="form-section">
                     <div class="form-group unit radio-group">
-                        <label class="form-label"><?php esc_html_e('Unit System:', 'keto-calculator'); ?></label>
+                        <label class="form-label"><?php esc_html_e('Unit System:', 'keto-macro-calculator'); ?></label>
                         <div class="radio-options">
                             <label class="radio-option">
                                 <input type="radio" name="unitSystem" value="metric" checked />
                                 <span class="radio-icon"></span>
-                                <span class="radio-label"><?php esc_html_e('Metric', 'keto-calculator'); ?></span>
+                                <span class="radio-label"><?php esc_html_e('Metric', 'keto-macro-calculator'); ?></span>
                                 <span class="dashicons dashicons-admin-site-alt3"></span>
                             </label>
                             <label class="radio-option">
                                 <input type="radio" name="unitSystem" value="us_customary" />
                                 <span class="radio-icon"></span>
-                                <span class="radio-label"><?php esc_html_e('Imperial', 'keto-calculator'); ?></span>
+                                <span class="radio-label"><?php esc_html_e('Imperial', 'keto-macro-calculator'); ?></span>
                                 <span class="dashicons dashicons-admin-site"></span>
                             </label>
                         </div>
                     </div>
-                    <h3 class="form-section-title"><?php esc_html_e('Personal Details', 'keto-calculator'); ?></h3>
+                    <h3 class="form-section-title"><?php esc_html_e('Personal Details', 'keto-macro-calculator'); ?></h3>
 
                     <div class="form-row">
                         <div class="form-group gender">
                             <label for="gender" class="form-label">
                                 <span class="dashicons dashicons-admin-users"></span>
-                                <?php esc_html_e('Gender:', 'keto-calculator'); ?>
+                                <?php esc_html_e('Gender:', 'keto-macro-calculator'); ?>
                             </label>
                             <div class="select-wrapper">
                                 <select id="gender" name="gender">
-                                    <option value="male"><?php esc_html_e('Male', 'keto-calculator'); ?></option>
-                                    <option value="female"><?php esc_html_e('Female', 'keto-calculator'); ?></option>
+                                    <option value="male"><?php esc_html_e('Male', 'keto-macro-calculator'); ?></option>
+                                    <option value="female"><?php esc_html_e('Female', 'keto-macro-calculator'); ?></option>
                                 </select>
                                 <span class="dashicons dashicons-arrow-down-alt2"></span>
                             </div>
@@ -96,7 +107,7 @@ function keto_macro_calculator() {
                         <div class="form-group age">
                             <label for="age" class="form-label">
                                 <span class="dashicons dashicons-calendar"></span>
-                                <?php esc_html_e('Age:', 'keto-calculator'); ?>
+                                <?php esc_html_e('Age:', 'keto-macro-calculator'); ?>
                             </label>
                             <div class="input-with-unit">
                                 <input type="number" id="age" name="age" placeholder="30">
@@ -108,7 +119,7 @@ function keto_macro_calculator() {
                         <div class="form-group weight">
                             <label for="weight" class="form-label">
                                 <span class="dashicons dashicons-performance"></span>
-                                <?php esc_html_e('Weight:', 'keto-calculator'); ?><span class="unit" id="weightUnit">kg</span>
+                                <?php esc_html_e('Weight:', 'keto-macro-calculator'); ?><span class="unit" id="weightUnit">kg</span>
                             </label>
                             <div class="input-with-unit">
                                 <input type="number" id="weight" name="weight" placeholder="70">
@@ -118,7 +129,7 @@ function keto_macro_calculator() {
                         <div class="form-group height">
                             <label for="height" class="form-label">
                                 <span class="dashicons dashicons-arrow-up-alt"></span>
-                                <?php esc_html_e('Height:', 'keto-calculator'); ?><span class="unit" id="heightUnit">cm</span>
+                                <?php esc_html_e('Height:', 'keto-macro-calculator'); ?><span class="unit" id="heightUnit">cm</span>
                             </label>
                             <div class="input-with-unit">
                                 <input type="number" id="height" name="height" placeholder="175">
@@ -128,19 +139,19 @@ function keto_macro_calculator() {
                 </div>
 
                 <div class="form-section">
-                    <h3 class="form-section-title"><?php esc_html_e('Activity & Goals', 'keto-calculator'); ?></h3>
+                    <h3 class="form-section-title"><?php esc_html_e('Activity & Goals', 'keto-macro-calculator'); ?></h3>
                     
                     <div class="form-group activity">
                         <label for="activity_level" class="form-label">
                             <span class="dashicons dashicons-universal-access-alt"></span>
-                            <?php esc_html_e('Activity Level:', 'keto-calculator'); ?>
+                            <?php esc_html_e('Activity Level:', 'keto-macro-calculator'); ?>
                         </label>
                         <div class="select-wrapper">
                             <select id="activity_level" name="activity_level">
-                                <option value="sedentary"><?php esc_html_e('Sedentary', 'keto-calculator'); ?></option>
-                                <option value="light"><?php esc_html_e('Lightly Active', 'keto-calculator'); ?></option>
-                                <option value="active"><?php esc_html_e('Active', 'keto-calculator'); ?></option>
-                                <option value="very_active"><?php esc_html_e('Very Active', 'keto-calculator'); ?></option>
+                                <option value="sedentary"><?php esc_html_e('Sedentary', 'keto-macro-calculator'); ?></option>
+                                <option value="light"><?php esc_html_e('Lightly Active', 'keto-macro-calculator'); ?></option>
+                                <option value="active"><?php esc_html_e('Active', 'keto-macro-calculator'); ?></option>
+                                <option value="very_active"><?php esc_html_e('Very Active', 'keto-macro-calculator'); ?></option>
                             </select>
                             <span class="dashicons dashicons-arrow-down-alt2"></span>
                         </div>
@@ -150,7 +161,7 @@ function keto_macro_calculator() {
                         <div class="form-group body-fat">
                         <label for="bodyFat" class="form-label">
                             <span class="dashicons dashicons-chart-area"></span>
-                            <?php esc_html_e('Body Fat: %', 'keto-calculator'); ?>
+                            <?php esc_html_e('Body Fat: %', 'keto-macro-calculator'); ?>
                         </label>
                         <div class="input-with-unit">
                             <input type="number" id="bodyFat" name="bodyFat" placeholder="20">
@@ -160,12 +171,12 @@ function keto_macro_calculator() {
                         <div class="form-group goal">
                             <label for="goal" class="form-label">
                                 <span class="dashicons dashicons-marker"></span>
-                                <?php esc_html_e('Goal:', 'keto-calculator'); ?>
+                                <?php esc_html_e('Goal:', 'keto-macro-calculator'); ?>
                             </label>
                             <div class="select-wrapper">
                                 <select id="goal" name="goal">
-                                    <option value="lose"><?php esc_html_e('Lose Weight', 'keto-calculator'); ?></option>
-                                    <option value="gain"><?php esc_html_e('Gain Weight', 'keto-calculator'); ?></option>
+                                    <option value="lose"><?php esc_html_e('Lose Weight', 'keto-macro-calculator'); ?></option>
+                                    <option value="gain"><?php esc_html_e('Gain Weight', 'keto-macro-calculator'); ?></option>
                                 </select>
                                 <span class="dashicons dashicons-arrow-down-alt2"></span>
                             </div>
@@ -175,26 +186,26 @@ function keto_macro_calculator() {
                 </div>
 
                 <div class="form-section">
-                    <h3 class="form-section-title"><?php esc_html_e('Keto Settings', 'keto-calculator'); ?></h3>
+                    <h3 class="form-section-title"><?php esc_html_e('Keto Settings', 'keto-macro-calculator'); ?></h3>
                     
                     <div class="form-group carbs">
                         <label for="net_carbs" class="form-label">
                             <span class="dashicons dashicons-carrot"></span>
-                            <?php esc_html_e('Daily Net Carbs:', 'keto-calculator'); ?><span class="unit">% of Calories</span>
+                            <?php esc_html_e('Daily Net Carbs:', 'keto-macro-calculator'); ?><span class="unit">% of Calories</span>
                         </label>
                         <div class="input-with-unit">
                             <input type="number" id="net_carbs" name="net_carbs" step="0.1" min="5" max="10" placeholder="5 - 10">
                             
                         </div>
                         <p class="form-description">
-                            <?php esc_html_e('Specify your target daily net carbs (typically 5 - 10 % of daily Calories or 20-30g/day to start ketosis)', 'keto-calculator'); ?>
+                            <?php esc_html_e('Specify your target daily net carbs (typically 5 - 10 % of daily Calories or 20-30g/day to start ketosis)', 'keto-macro-calculator'); ?>
                         </p>
                     </div>
                 </div>
 
                 <button type="submit" class="keto-calc-btn">
                     <span class="dashicons dashicons-calculator"></span>
-                    <?php esc_html_e('Calculate My Macros', 'keto-calculator'); ?>
+                    <?php esc_html_e('Calculate My Macros', 'keto-macro-calculator'); ?>
                 </button>
             </form>
             <div class="calc-side-panel">
@@ -219,15 +230,15 @@ function keto_macro_calculator() {
         <div id="ketoResults" style="visibility: hidden; opacity: 0; height: 0px">
             <div class="main-results">
                 <div class="results-group">
-                    <h2><?php esc_html_e('Your Results', 'keto-calculator'); ?></h2>
+                    <h2><?php esc_html_e('Your Results', 'keto-macro-calculator'); ?></h2>
                     <div class="result-group">
                         <h3>Your Current Base Metabolic Rate.</h3>
-                        <p class="value"><?php esc_html_e('BMR:', 'keto-calculator'); ?> <span id="bmrValue">--</span> kcal/day</p>
+                        <p class="value"><?php esc_html_e('BMR:', 'keto-macro-calculator'); ?> <span id="bmrValue">--</span> kcal/day</p>
                         <p><i>Based on the more accurate <a href="https://en.wikipedia.org/wiki/Basal_metabolic_rate">Katch-McArdle formula</a> when body fat % is known</i></p>
                     </div>
                     <div class="result-group">
                         <h3>Daily Calories</h3>
-                        <p class="value"><?php esc_html_e('Calories to Consume:', 'keto-calculator'); ?> <span id="caloriesToConsume">--</span> kcal/day</p>
+                        <p class="value"><?php esc_html_e('Calories to Consume:', 'keto-macro-calculator'); ?> <span id="caloriesToConsume">--</span> kcal/day</p>
                         <p><i>Your daily TDEE "activity adjusted" Calorie Intake.</i></p>
                     </div>
                 </div>
@@ -236,17 +247,17 @@ function keto_macro_calculator() {
                     <div class="chart-summary">
                         <p>
                             <?php 
-                            echo esc_html__('A', 'keto-calculator') . ' '; 
+                            echo esc_html__('A', 'keto-macro-calculator') . ' '; 
                             ?><span id="summaryAge">--</span><?php 
-                            echo ' ' . esc_html__('year old', 'keto-calculator') . ' '; 
+                            echo ' ' . esc_html__('year old', 'keto-macro-calculator') . ' '; 
                             ?><span id="summaryActivity">--</span><?php 
                             echo ' '; 
                             ?><span id="summaryGender">--</span><?php 
                             echo ', '; 
                             ?><span id="summaryHeight">--</span><?php 
-                            echo ' ' . esc_html__('tall', 'keto-calculator') . ', ' . esc_html__('weighing', 'keto-calculator') . ' '; 
+                            echo ' ' . esc_html__('tall', 'keto-macro-calculator') . ', ' . esc_html__('weighing', 'keto-macro-calculator') . ' '; 
                             ?><span id="summaryWeight">--</span><?php 
-                            echo ', ' . esc_html__('with a body fat % of', 'keto-calculator') . ' '; 
+                            echo ', ' . esc_html__('with a body fat % of', 'keto-macro-calculator') . ' '; 
                             ?><span id="summaryBodyFat">--</span><?php 
                             echo '.'; 
                             ?>

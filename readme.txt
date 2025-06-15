@@ -1,12 +1,14 @@
 === Keto Macro Calculator ===
 Contributors: James Dennis
 Donate link: https://jamesdennis.org
-Tags: keto, calculator, nutrition, health, macro, ketogenic, diet
+Tags: keto, calculator, nutrition, health, macro
 Requires at least: 5.6
-Tested up to: 6.8.1
-Stable tag: 1.2.5
+Tested up to: 6.8
+Stable tag: 1.4.1
 License: GPL v3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
+
+Keto Macro Calculator is a modern, accurate nutrition calculator used to measure nutritional needs for a ketogenic diet.
 
 == Description ==
 
@@ -63,7 +65,7 @@ Basic customization through WordPress theme styling is automatic. Advanced custo
 
 == Changelog ==
 
-= 1.0 =
+= 1.3 =
 * Initial release of Keto Macro Calculator
 * Includes basic calculator functionality
 * Responsive design implementation

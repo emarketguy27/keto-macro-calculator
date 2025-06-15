@@ -155,12 +155,13 @@ input[type="text"],
 select {
   width: 100%;
   padding: var(--kc-space-sm) var(--kc-space);
-  border: 1px solid var(--kc-border);
+  border: 1px solid var(--kc-border)!important;  /* Override wordpress/theme styling to avoid conflicting style */
   border-radius: var(--kc-radius-sm);
   font-size: var(--kc-font-size);
   transition: var(--kc-transition);
-  background-color: var(--kc-bg-alt);
+  background-color: var(--kc-bg-alt)!important; /* Override wordpress/theme styling to avoid conflicting style */
   color: var(--kc-text);
+  background: none!important; /* Override wordpress/theme styling to avoid conflicting style */
 
   &:focus {
     outline: none;
@@ -422,8 +423,8 @@ input#net_carbs {
 }
 
 .form-description {
-  padding: 0 2.5em;
-  margin-bottom: 3em;
+  padding: 0 4px;
+  margin-block: 1em;
 }
 
 .variations-header {
