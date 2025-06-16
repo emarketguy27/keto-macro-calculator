@@ -4,7 +4,7 @@ Donate link: https://jamesdennis.org
 Tags: keto, calculator, nutrition, health, macro
 Requires at least: 5.6
 Tested up to: 6.8
-Stable tag: 1.4.1
+Stable tag: 1.5
 License: GPL v3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
