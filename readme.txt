@@ -1,5 +1,5 @@
 === Keto Macro Calculator ===
-Contributors: James Dennis
+Contributors: jdennisuk
 Donate link: https://jamesdennis.org
 Tags: keto, calculator, nutrition, health, macro
 Requires at least: 5.6
