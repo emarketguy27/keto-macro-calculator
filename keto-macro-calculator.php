@@ -12,11 +12,6 @@
 * Text Domain: keto-macro-calculator
 */
 
-function keto_macro_calculator_init() {
-    $plugin_rel_path = basename( dirname( __FILE__ ) ) . '/languages'; 
-    load_plugin_textdomain( 'keto_macro_calculator', false, $plugin_rel_path );
-}
-add_action('plugins_loaded', 'keto_macro_calculator_init');
 
 // Enqueue the JavaScript and CSS files
 function keto_macro_calculator_enqueue_scripts() {
