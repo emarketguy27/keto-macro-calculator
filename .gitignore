@@ -21,5 +21,4 @@ postcss.config.js
 /composer.lock
 /package-lock.json
 *.log
-*.zip
 .DS_Store
