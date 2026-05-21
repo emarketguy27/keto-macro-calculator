@@ -3,8 +3,8 @@ Contributors: jdennisuk
 Donate link: https://jamesdennis.org
 Tags: keto, calculator, nutrition, health, macro
 Requires at least: 5.6
-Tested up to: 6.9.1
-Stable tag: 1.6
+Tested up to: 7.0
+Stable tag: 1.6.1
 License: GPL v3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
