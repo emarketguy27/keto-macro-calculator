@@ -3,7 +3,7 @@
 * Plugin Name: Keto Macro Calculator
 * Plugin URI: https://jamesdennis.org/keto-macro-calculator.html
 * Description: A modern, accurate nutrition calculator used to measure nutritional needs for a ketogenic diet.
-* Version: 1.6.1
+* Version: 1.7
 * Requires at least: 5.6
 * Author: James Dennis
 * Author URI: https://jamesdennis.org
